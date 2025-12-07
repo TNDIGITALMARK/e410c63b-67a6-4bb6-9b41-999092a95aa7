@@ -1,299 +1,229 @@
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { HeroSection } from '@/components/home/HeroSection';
-import { CourseCard } from '@/components/courses/CourseCard';
-import Image from 'next/image';
+import { EcommerceHeader } from '@/components/layout/EcommerceHeader';
+import { EcommerceFooter } from '@/components/layout/EcommerceFooter';
+import { ProductCard } from '@/components/products/ProductCard';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Star, Award, Users, Sparkles, Trophy, Clock, MapPin } from 'lucide-react';
+import { Gift, Cake, Heart, Sparkles, TrendingUp, Calendar } from 'lucide-react';
+import { featuredGifts, birthdayGifts } from '@/lib/data/products';
 
-// Mock data for MVP - will be replaced with API calls
-const courses = [
+const occasions = [
   {
-    id: 1,
-    slug: 'heritage-course',
-    name: 'The Heritage Course',
-    tagline: 'A timeless Robert Trent Jones II masterpiece',
-    parTotal: 72,
-    yardageTotal: 7245,
-    difficultyRating: 73.5,
-    heroImageUrl: '/images/generated/heritage-course-clubhouse.png',
-    location: 'Main Campus',
+    id: 'birthday',
+    name: 'Birthdays',
+    description: 'Make their special day unforgettable',
+    icon: Cake,
+    color: 'from-amber-400 to-orange-400',
+    href: '/occasions/birthday',
   },
   {
-    id: 2,
-    slug: 'lakeside-course',
-    name: 'The Lakeside Course',
-    tagline: 'Spectacular lakefront golf experience',
-    parTotal: 71,
-    yardageTotal: 7120,
-    difficultyRating: 72.8,
-    heroImageUrl: '/images/generated/lakeside-course-bridge.png',
-    location: 'West Campus',
+    id: 'wedding',
+    name: 'Weddings',
+    description: 'Celebrate love with perfect gifts',
+    icon: Heart,
+    color: 'from-pink-400 to-rose-400',
+    href: '/occasions/wedding',
   },
   {
-    id: 3,
-    slug: 'ridge-course',
-    name: 'The Ridge Course',
-    tagline: 'Mountain vistas and dramatic elevation',
-    parTotal: 72,
-    yardageTotal: 6985,
-    difficultyRating: 71.5,
-    heroImageUrl: '/images/generated/ridge-course-mountain-view.png',
-    location: 'North Campus',
-  },
-];
-
-const testimonials = [
-  {
-    id: 1,
-    name: 'Michael Anderson',
-    role: 'Golf Membership',
-    quote: 'Sterling Oaks has exceeded every expectation. The courses are impeccably maintained, and the staff makes you feel like family.',
-    rating: 5,
+    id: 'corporate',
+    name: 'Corporate',
+    description: 'Professional gifts that impress',
+    icon: TrendingUp,
+    color: 'from-blue-400 to-indigo-400',
+    href: '/occasions/corporate',
   },
   {
-    id: 2,
-    name: 'Sarah Thompson',
-    role: 'Premier Membership',
-    quote: 'From the moment I joined, I knew this was special. The attention to detail and level of service is truly world-class.',
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: 'Robert Chen',
-    role: 'Golf Membership',
-    quote: 'The Heritage Course is my favorite. Every hole presents a unique challenge, and the scenery is absolutely breathtaking.',
-    rating: 5,
+    id: 'anniversary',
+    name: 'Anniversaries',
+    description: 'Honor love and commitment',
+    icon: Sparkles,
+    color: 'from-purple-400 to-pink-400',
+    href: '/occasions/anniversary',
   },
 ];
 
 export default function HomePage() {
   return (
     <>
-      <Header />
+      <EcommerceHeader />
 
       <main>
         {/* Hero Section */}
-        <HeroSection />
+        <section className="relative bg-gradient-soft-pink overflow-hidden">
+          <div className="absolute inset-0 bg-[url('/patterns/celebration-pattern.svg')] opacity-5" />
+          <div className="container mx-auto px-4 py-20 md:py-32 relative z-10">
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                Make Every
+                <span className="block text-transparent bg-clip-text bg-gradient-celebration font-handwriting text-6xl md:text-7xl lg:text-8xl">
+                  Celebration
+                </span>
+                Unforgettable
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+                Discover curated gifts and custom cakes for birthdays, weddings, anniversaries, and every special moment worth celebrating.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <Button asChild size="lg" className="text-base">
+                  <Link href="/gifts">
+                    <Gift className="h-5 w-5 mr-2" />
+                    Browse Gifts
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="text-base">
+                  <Link href="/cake-builder">
+                    <Cake className="h-5 w-5 mr-2" />
+                    Build Your Cake
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+          {/* Decorative elements */}
+          <div className="absolute top-20 left-10 w-20 h-20 bg-primary/10 rounded-full blur-2xl" />
+          <div className="absolute bottom-20 right-10 w-32 h-32 bg-accent/10 rounded-full blur-3xl" />
+        </section>
 
-        {/* Championship Courses Section */}
-        <section className="py-20 bg-background">
+        {/* Shop by Occasion Section */}
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
-                Our Championship Courses
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">
+                Shop by Occasion
               </h2>
-              <div className="w-24 h-1 bg-accent mx-auto mb-6" />
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Experience world-class golf on three distinctly challenging courses, each designed to test your skills and reward precision
+                Find the perfect gift for every celebration
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {courses.map((course) => (
-                <CourseCard key={course.id} {...course} />
-              ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {occasions.map((occasion) => {
+                const Icon = occasion.icon;
+                return (
+                  <Link
+                    key={occasion.id}
+                    href={occasion.href}
+                    className="group relative overflow-hidden rounded-2xl p-8 bg-gradient-to-br hover:shadow-product-hover transition-all duration-300 hover:-translate-y-1"
+                    style={{
+                      backgroundImage: `linear-gradient(to bottom right, var(--tw-gradient-stops))`,
+                    }}
+                  >
+                    <div className={`bg-gradient-to-br ${occasion.color} absolute inset-0 opacity-10 group-hover:opacity-15 transition-opacity`} />
+                    <div className="relative z-10 space-y-3">
+                      <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br ${occasion.color}`}>
+                        <Icon className="h-6 w-6 text-white" />
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground">{occasion.name}</h3>
+                      <p className="text-sm text-muted-foreground">{occasion.description}</p>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* Membership CTA Section */}
-        <section className="py-20 bg-primary text-primary-foreground relative overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <Image
-              src="/images/generated/membership-golfers-community.png"
-              alt="Sterling Oaks Members"
-              fill
-              className="object-cover opacity-20"
-            />
+        {/* Featured Products Section */}
+        <section className="py-16 bg-muted/50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-4">
+                <Sparkles className="h-4 w-4" />
+                Featured
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">
+                Bestselling Gifts
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Our most loved gifts, perfect for any celebration
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {featuredGifts.map((product) => (
+                <ProductCard key={product.id} {...product} />
+              ))}
+            </div>
+
+            <div className="text-center mt-10">
+              <Button asChild size="lg" variant="outline">
+                <Link href="/gifts">View All Gifts</Link>
+              </Button>
+            </div>
           </div>
+        </section>
+
+        {/* Custom Cake CTA Section */}
+        <section className="py-20 bg-gradient-celebration text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-[url('/patterns/cake-pattern.svg')] opacity-10" />
           <div className="container mx-auto px-4 relative z-10 text-center">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-              Elevate Your Game at Sterling Oaks
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm font-semibold text-sm mb-6">
+              <Cake className="h-4 w-4" />
+              Custom Cake Builder
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Design Your Dream Cake
             </h2>
-            <p className="text-lg mb-8 max-w-3xl mx-auto text-primary-foreground/90 leading-relaxed">
-              Join a community of passionate golfers and enjoy unparalleled access to our world-class facilities. Our memberships include priority tee times, exclusive events, access to the elite practice academy, and unforgettable experiences. Discover the privilege of belonging to Sterling Oaks Golf Club.
+            <p className="text-lg mb-8 max-w-3xl mx-auto text-white/90 leading-relaxed">
+              Create a one-of-a-kind cake that's perfect for your celebration. Choose from 12 flavors, 4 sizes, and 10 beautiful themes. Add a custom message and watch your vision come to life!
             </p>
             <Button
               asChild
               size="lg"
-              className="bg-accent text-accent-foreground hover:bg-accent/90 text-base px-8 py-6"
+              className="bg-white text-primary hover:bg-white/90 text-base px-8 py-6 font-semibold"
             >
-              <Link href="/membership">Discover Membership Tiers</Link>
+              <Link href="/cake-builder">Start Building Your Cake</Link>
             </Button>
           </div>
         </section>
 
-        {/* Facilities Section */}
-        <section className="py-20 bg-muted">
+        {/* Why Choose Us Section */}
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
-                World-Class Facilities
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">
+                Why Shop With Us?
               </h2>
-              <div className="w-24 h-1 bg-accent mx-auto mb-6" />
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Every detail designed to enhance your golfing experience
+                We make celebrations effortless and memorable
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <div className="bg-card p-8 rounded-lg border text-center hover:shadow-lg transition-all hover:-translate-y-1">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
-                  <Trophy className="h-8 w-8 text-primary" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+              <div className="text-center space-y-3">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-2">
+                  <TrendingUp className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-serif font-semibold mb-3">Championship Courses</h3>
-                <p className="text-muted-foreground text-sm">
-                  Three award-winning courses designed by Robert Trent Jones II
+                <h3 className="text-xl font-semibold">Premium Quality</h3>
+                <p className="text-sm text-muted-foreground">
+                  Curated gifts and handcrafted cakes made with love and attention to detail
                 </p>
               </div>
 
-              <div className="bg-card p-8 rounded-lg border text-center hover:shadow-lg transition-all hover:-translate-y-1">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
-                  <Sparkles className="h-8 w-8 text-primary" />
+              <div className="text-center space-y-3">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-2">
+                  <Calendar className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-serif font-semibold mb-3">Practice Facilities</h3>
-                <p className="text-muted-foreground text-sm">
-                  State-of-the-art driving range, putting greens, and short game areas
+                <h3 className="text-xl font-semibold">On-Time Delivery</h3>
+                <p className="text-sm text-muted-foreground">
+                  Same-day and scheduled delivery options to ensure your gifts arrive perfectly timed
                 </p>
               </div>
 
-              <div className="bg-card p-8 rounded-lg border text-center hover:shadow-lg transition-all hover:-translate-y-1">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
-                  <Award className="h-8 w-8 text-primary" />
+              <div className="text-center space-y-3">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-2">
+                  <Heart className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-serif font-semibold mb-3">Golf Academy</h3>
-                <p className="text-muted-foreground text-sm">
-                  Expert instruction from PGA professionals with cutting-edge technology
+                <h3 className="text-xl font-semibold">100% Satisfaction</h3>
+                <p className="text-sm text-muted-foreground">
+                  We guarantee you'll love every gift and cake, or we'll make it right
                 </p>
-              </div>
-
-              <div className="bg-card p-8 rounded-lg border text-center hover:shadow-lg transition-all hover:-translate-y-1">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
-                  <Users className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-serif font-semibold mb-3">Clubhouse & Dining</h3>
-                <p className="text-muted-foreground text-sm">
-                  Elegant clubhouse with fine dining and private event spaces
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section className="py-20 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
-                What Our Members Say
-              </h2>
-              <div className="w-24 h-1 bg-accent mx-auto mb-6" />
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Join a community of passionate golfers who call Sterling Oaks home
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {testimonials.map((testimonial) => (
-                <div
-                  key={testimonial.id}
-                  className="bg-card p-8 rounded-lg border shadow-md hover:shadow-xl transition-shadow"
-                >
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 fill-accent text-accent" />
-                    ))}
-                  </div>
-                  <p className="text-foreground mb-6 leading-relaxed italic">
-                    &quot;{testimonial.quote}&quot;
-                  </p>
-                  <div className="border-t pt-4">
-                    <p className="font-semibold text-foreground">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Stats Section */}
-        <section className="py-20 bg-primary text-primary-foreground">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              <div className="space-y-2">
-                <div className="text-5xl md:text-6xl font-bold text-accent">30+</div>
-                <div className="text-sm md:text-base text-primary-foreground/90">Years of Excellence</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-5xl md:text-6xl font-bold text-accent">500+</div>
-                <div className="text-sm md:text-base text-primary-foreground/90">Member Families</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-5xl md:text-6xl font-bold text-accent">15+</div>
-                <div className="text-sm md:text-base text-primary-foreground/90">Tournament Championships</div>
-              </div>
-              <div className="space-y-2">
-                <div className="text-5xl md:text-6xl font-bold text-accent">75K+</div>
-                <div className="text-sm md:text-base text-primary-foreground/90">Rounds Played Annually</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Quick Links Section */}
-        <section className="py-20 bg-muted">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Events */}
-              <div className="bg-card p-8 rounded-lg border text-center hover:shadow-lg transition-all hover:-translate-y-1">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mb-4">
-                  <Clock className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-2xl font-serif font-semibold mb-4">Events Calendar</h3>
-                <p className="text-muted-foreground mb-6">
-                  Join us for tournaments, clinics, and exclusive member events throughout the year.
-                </p>
-                <Button asChild variant="outline">
-                  <Link href="/events">View Events</Link>
-                </Button>
-              </div>
-
-              {/* Academy */}
-              <div className="bg-card p-8 rounded-lg border text-center hover:shadow-lg transition-all hover:-translate-y-1">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mb-4">
-                  <Award className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-2xl font-serif font-semibold mb-4">Golf Academy</h3>
-                <p className="text-muted-foreground mb-6">
-                  Improve your game with our PGA professionals and state-of-the-art training facilities.
-                </p>
-                <Button asChild variant="outline">
-                  <Link href="/academy">Learn More</Link>
-                </Button>
-              </div>
-
-              {/* Contact */}
-              <div className="bg-card p-8 rounded-lg border text-center hover:shadow-lg transition-all hover:-translate-y-1">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mb-4">
-                  <MapPin className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-2xl font-serif font-semibold mb-4">Visit Us</h3>
-                <p className="text-muted-foreground mb-6">
-                  Schedule a tour or contact us to learn more about membership opportunities.
-                </p>
-                <Button asChild variant="outline">
-                  <Link href="/contact">Contact Us</Link>
-                </Button>
               </div>
             </div>
           </div>
         </section>
       </main>
 
-      <Footer />
+      <EcommerceFooter />
     </>
   );
 }

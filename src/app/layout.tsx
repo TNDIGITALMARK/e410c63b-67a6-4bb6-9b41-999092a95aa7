@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { QueryProvider } from "@/components/query-provider";
@@ -8,22 +7,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-// Elegant serif font for headings
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-// Clean sans-serif for body text
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "Sterling Oaks Golf Club | Championship Golf Experience",
-  description: "Experience championship golf on three award-winning courses designed by Robert Trent Jones II. Premium memberships, events, and world-class amenities.",
+  title: "CelebrationShop | Gifts & Custom Cakes for Every Occasion",
+  description: "Discover curated gifts and custom cakes for birthdays, weddings, anniversaries, and all celebrations. Same-day delivery available. Design your dream cake today!",
 };
 
 export default function RootLayout({
@@ -36,9 +22,7 @@ export default function RootLayout({
       <head>
 
       </head>
-      <body
-        className={`${inter.variable} ${playfair.variable} antialiased font-sans`}
-      >
+      <body className="antialiased font-sans">
         <QueryProvider>
           <ZyloProvider>
             <ThemeProvider

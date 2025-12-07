@@ -1,50 +1,55 @@
 @import "tailwindcss";
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ============================================
+   CELEBRATION E-COMMERCE DESIGN SYSTEM
+   E-commerce platform for gifts and custom cakes
+   Warm, celebratory, and trustworthy aesthetic
+   ============================================ */
+
+/* Google Fonts Import - Friendly, modern typography */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Caveat:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Premium golf club color palette */
-  /* Off-white background with charcoal text */
-  --background: 40 20% 97%;
-  --foreground: 0 0% 15%;
+  /* Celebration color palette - warm, joyful, trustworthy */
+  /* Soft cream background for warmth */
+  --background: 40 30% 98%;
+  --foreground: 340 10% 20%;
 
-  /* Clean white cards with charcoal text */
+  /* Pure white cards with warm text */
   --card: 0 0% 100%;
-  --card-foreground: 0 0% 15%;
+  --card-foreground: 340 10% 20%;
 
   /* Popovers with white background */
   --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 15%;
+  --popover-foreground: 340 10% 20%;
 
-  /* Primary: Deep forest green with white text */
-  --primary: 155 30% 25%;
-  --primary-foreground: 0 0% 100%;
+  /* Primary: Celebration gold - joyful and premium */
+  --primary: 38 92% 58%;
+  --primary-foreground: 340 10% 20%;
 
-  /* Secondary: Gold/champagne accent */
-  --secondary: 45 65% 60%;
-  --secondary-foreground: 0 0% 15%;
+  /* Secondary: Soft rose pink - festive and gentle */
+  --secondary: 340 70% 88%;
+  --secondary-foreground: 340 10% 20%;
 
-  /* Muted: Light green-gray with darker text */
-  --muted: 155 15% 92%;
-  --muted-foreground: 0 0% 40%;
+  /* Muted: Light warm gray for subtle elements */
+  --muted: 40 15% 94%;
+  --muted-foreground: 340 5% 45%;
 
-  /* Accent: Gold for highlights */
-  --accent: 45 75% 55%;
-  --accent-foreground: 0 0% 15%;
+  /* Accent: Rich rose gold for highlights */
+  --accent: 345 80% 65%;
+  --accent-foreground: 0 0% 100%;
 
-  /* Destructive: Elegant red */
-  --destructive: 0 65% 48%;
+  /* Destructive: Gentle red for errors */
+  --destructive: 0 70% 55%;
   --destructive-foreground: 0 0% 100%;
 
-  /* Borders: Soft neutral */
-  --border: 0 0% 88%;
-  --input: 0 0% 88%;
-  --ring: 155 30% 25%;
+  /* Borders: Soft warm neutral */
+  --border: 40 10% 90%;
+  --input: 40 10% 90%;
+  --ring: 38 92% 58%;
 
-  /* Slightly more rounded for elegance */
-  --radius: 0.5rem;
+  /* Friendly rounded corners */
+  --radius: 0.75rem;
 
   /* Sidebar: Clean white with black text */
   --sidebar-background: 0 0% 100%;
@@ -178,25 +183,158 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Premium golf club typography */
+/* ============================================
+   TYPOGRAPHY SYSTEM
+   Friendly, modern, and celebratory
+   ============================================ */
+
+/* CSS Custom Properties for Fonts */
+:root {
+  --font-primary: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-handwriting: 'Caveat', cursive;
+}
+
+/* Font Family Utilities */
 .font-sans {
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-primary);
 }
 
-.font-serif {
-  font-family: var(--font-playfair), ui-serif, Georgia, serif;
+.font-handwriting {
+  font-family: var(--font-handwriting);
 }
 
+/* Base Typography on Body */
+body {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* Heading Styles - Clear hierarchy */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-playfair), ui-serif, Georgia, serif;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: hsl(var(--foreground));
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 1.25rem;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  margin-bottom: 0.875rem;
+}
+
+h5 {
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+}
+
+h6 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
   font-weight: 600;
-  letter-spacing: -0.025em;
+}
+
+/* Paragraph Styles */
+p {
+  margin-bottom: 1rem;
   color: hsl(var(--foreground));
 }
 
-/* Clean button styles */
+/* Link Styles */
+a {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: hsl(var(--accent));
+}
+
+/* Strong and Emphasis */
+strong, b {
+  font-weight: 600;
+}
+
+em, i {
+  font-style: italic;
+}
+
+/* Code Elements */
+code, pre {
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  background: hsl(var(--muted));
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+}
+
+/* ============================================
+   COMPONENT DEFAULTS
+   Buttons, forms, and interactive elements
+   ============================================ */
+
+/* Button Reset and Defaults */
 button {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+
+button:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Form Input Defaults */
+input, textarea, select {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 3px hsl(var(--ring) / 0.1);
+}
+
+input::placeholder, textarea::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Label Styles */
+label {
   font-weight: 500;
+  font-size: 0.875rem;
+  color: hsl(var(--foreground));
+  margin-bottom: 0.375rem;
+  display: block;
 }
 
 /* Subtle shadows for depth */
@@ -282,11 +420,54 @@ img {
   transition: opacity 0.3s ease-in-out;
 }
 
-/* Premium gradient backgrounds */
-.gradient-gold {
-  background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--secondary)) 100%);
+/* ============================================
+   CELEBRATION GRADIENTS & EFFECTS
+   Joyful, warm, and festive
+   ============================================ */
+
+/* Celebration gradients */
+.gradient-celebration {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
 }
 
-.gradient-green {
-  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(155 35% 30%) 100%);
+.gradient-soft-pink {
+  background: linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(0 0% 100%) 100%);
+}
+
+.gradient-warm {
+  background: linear-gradient(135deg, hsl(38 92% 58%) 0%, hsl(345 80% 65%) 50%, hsl(340 70% 88%) 100%);
+}
+
+/* Shadow system for e-commerce feel */
+.shadow-product {
+  box-shadow: 0 4px 12px 0 rgb(0 0 0 / 0.08), 0 2px 4px 0 rgb(0 0 0 / 0.05);
+}
+
+.shadow-product-hover {
+  box-shadow: 0 12px 24px 0 rgb(0 0 0 / 0.12), 0 4px 8px 0 rgb(0 0 0 / 0.08);
+}
+
+/* Badge and tag styles */
+.badge-occasion {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-birthday {
+  background: hsl(38 92% 90%);
+  color: hsl(38 92% 38%);
+}
+
+.badge-wedding {
+  background: hsl(340 70% 95%);
+  color: hsl(340 70% 40%);
+}
+
+.badge-corporate {
+  background: hsl(220 70% 95%);
+  color: hsl(220 70% 40%);
 }
